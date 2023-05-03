@@ -5,21 +5,22 @@ import org.testng.annotations.*;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    public static WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
-    @AfterMethod
-    public void clearCookie() {
-        driver.manage().deleteAllCookies();
-    }
+//    @AfterMethod
+//    public void clearCookie() {
+//        driver.manage().deleteAllCookies();
+//    }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod
     public void tearDown() {
+        driver.manage().deleteAllCookies();
         driver.quit();
         driver = null;
     }
